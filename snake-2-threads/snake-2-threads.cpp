@@ -8,19 +8,19 @@ using namespace std;
 
 
 
-struct SpinlockMutex
-{
-	atomic_flag flag = ATOMIC_FLAG_INIT;
+class SpinLock {
+	atomic_flag m_flag;
+public:
+	SpinLock() :m_flag ATOMIC_FLAG_INIT{}
 	void lock()
 	{
-		while (flag.test_and_set(std::memory_order_acquire));
+		while (m_flag.test_and_set());
 	}
 	void unlock()
 	{
-		flag.clear(std::memory_order_release);
+		m_flag.clear();
 	}
 };
-SpinlockMutex myMytex;
 
 
 queue<int> dataQueue; //для передачи нажатий клавиш
