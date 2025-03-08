@@ -4,6 +4,7 @@
 #include <thread>
 #include <queue>
 #include <atomic>
+
 using namespace std;
 
 
@@ -178,9 +179,7 @@ int main()
 
 				if ( X2 == X_apple && Y2 == Y_apple) // проверка на достижение "яблока"
 				{
-
-					if (X2 == X_apple && Y2 == Y_apple)
-					{
+										
 						c2.X = array_X2[length2 - 1];
 						c2.Y = array_Y2[length2 - 1];
 						SetConsoleCursorPosition(h2, c2);
@@ -193,9 +192,7 @@ int main()
 						SetConsoleCursorPosition(h2, c2);
 						SetConsoleTextAttribute(h2, 11);
 						cout << head2;
-
-					}
-			
+	
 					if (length2 == max_length2) // проверка, достигла ли длина "змейки" своего максимального значения
 					{
 						
@@ -239,7 +236,6 @@ int main()
 					for (; r < length2; r++)
 						if (X2 == array_X2[r] && Y2 == array_Y2[r]) // если совпадение найдено в цикле - прерываемся
 						{
-							//SetConsoleTextAttribute(h, 10);
 							cout << " Crash - Win Player 1 GREEN ";
 							winQueue.pop();
 							winQueue.push(true);
@@ -261,10 +257,7 @@ int main()
 							c2.Y = array_Y2[0];
 							SetConsoleCursorPosition(h2, c2);
 							cout << ' ';
-						}
-					
-						if (X2 != 0 && X2 != width - 1 && Y2 != 0 && Y2 != height - 1)
-						{
+						
 							if (length2 > 1)
 							{
 								c2.X = array_X2[length2 - 1];
@@ -273,20 +266,14 @@ int main()
 								SetConsoleTextAttribute(h2, 11);
 								putchar(snake2);
 							}
-						}
-
-						if (X2 != 0 && X2 != width - 1 && Y2 != 0 && Y2 != height - 1)
-						{
+					
 							for (int r = 0; r < length2 - 1; r++)
 							{
 								array_X2[r] = array_X2[r + 1];
 								array_Y2[r] = array_Y2[r + 1];
 
-					}
-					}
-
-						if (X2 != 0 && X2 != width - 1 && Y2 != 0 && Y2 != height - 1)
-						{
+					          }
+					
 							c2.X = array_X2[length2 - 1] = X2;
 							c2.Y = array_Y2[length2 - 1] = Y2;
 							SetConsoleCursorPosition(h2, c2);
@@ -371,8 +358,7 @@ int main()
 		if (X == X_apple && Y == Y_apple ) // проверка на достижение "яблока"
 		{
 
-			if (X == X_apple && Y == Y_apple)
-			{
+			
 				c.X = array_X[length - 1]; // установка в объект координат позиции головы "змейки"
 				c.Y = array_Y[length - 1];
 				SetConsoleCursorPosition(h, c); // установка курсора в эту позицию
@@ -386,7 +372,7 @@ int main()
 				SetConsoleCursorPosition(h, c); // установка туда курсора
 				SetConsoleTextAttribute(h, 10);
 				cout << head; // и отображение там символа головы "змейки"
-			}
+			
 
 			if (length == max_length) // проверка, достигла ли длина "змейки" своего максимального значения
 			{
@@ -449,10 +435,7 @@ int main()
 					c.Y = array_Y[0];
 					SetConsoleCursorPosition(h, c); // двигаем туда курсор
 					cout << ' '; // и отображаем пробел (затирка хвоста)
-				}
-
-				if (X != 0 && X != width - 1 && Y != 0 && Y != height - 1)
-				{
+			
 					if (length > 1) // если длина змейки больше 
 					{
 						c.X = array_X[length - 1]; // устанавливаем в объект координат предыдущую позицию головы "змейки"
@@ -461,20 +444,14 @@ int main()
 						SetConsoleTextAttribute(h, 10);
 						putchar(snake); // выводим символ тела "змейки"
 					}
-				}
-
-				if (X != 0 && X != width - 1 && Y != 0 && Y != height - 1)
-				{
+			
 					for (int i = 0; i < length - 1; i++) // запускаем цикл свдига координат звеньев "змейки"
 					{
 						array_X[i] = array_X[i + 1]; // обрабатываем все звенья - кроме последнего
 						array_Y[i] = array_Y[i + 1];
 
 					}
-				}
-
-				if (X != 0 && X != width - 1 && Y != 0 && Y != height - 1)
-				{
+			
 					c.X = array_X[length - 1] = X; // устанавливаем новую позицию головы "змейки"
 					c.Y = array_Y[length - 1] = Y;
 					SetConsoleCursorPosition(h, c); // двигаем туда курсора
