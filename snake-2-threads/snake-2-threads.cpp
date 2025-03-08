@@ -176,7 +176,7 @@ int main()
 
 				if ( X2 == X_apple && Y2 == Y_apple) // проверка на достижение "яблока"
 				{
-	     			spinLock.lock();
+	     			        spinLock.lock();
 						c2.X = array_X2[length2 - 1];
 						c2.Y = array_Y2[length2 - 1];
 						SetConsoleCursorPosition(h2, c2);
@@ -277,7 +277,7 @@ int main()
 							SetConsoleCursorPosition(h2, c2);
 							SetConsoleTextAttribute(h2, 11);
 							cout << head2;
-    					  spinLock.unlock();
+    					         spinLock.unlock();
 
 						}
 
