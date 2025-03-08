@@ -4,10 +4,7 @@
 #include <thread>
 #include <queue>
 #include <atomic>
-
 using namespace std;
-
-
 
 class SpinLock {
 	atomic_flag m_flag;
@@ -129,7 +126,6 @@ int main()
 	thread play2([&]()
 		{
 
-			//this_thread::sleep_for(chrono::milliseconds(50));
 			do
 			{
 				Sleep(sleep_time);
@@ -180,8 +176,7 @@ int main()
 
 				if ( X2 == X_apple && Y2 == Y_apple) // проверка на достижение "яблока"
 				{
-					
-					spinLock.lock();
+	     			spinLock.lock();
 						c2.X = array_X2[length2 - 1];
 						c2.Y = array_Y2[length2 - 1];
 						SetConsoleCursorPosition(h2, c2);
@@ -194,11 +189,10 @@ int main()
 						SetConsoleCursorPosition(h2, c2);
 						SetConsoleTextAttribute(h2, 11);
 						cout << head2;
+					spinLock.unlock();
 
-						spinLock.unlock();
 					if (length2 == max_length2) // проверка, достигла ли длина "змейки" своего максимального значения
 					{
-						
 						cout << " Win Player 2 BLUE ";
 						winQueue.pop();
 						winQueue.push(true);
@@ -223,16 +217,13 @@ int main()
 
 					} while (i < length || r < length2); // поиск новых координат продолжается, пока число несовпадающих координат меньше длины "змейки"
 
-
-					spinLock.lock();
-
-					apple_coordinate.X = X_apple; // установка в объект координат новой корректной позиции "яблока"
-					apple_coordinate.Y = Y_apple;
-					SetConsoleCursorPosition(h, apple_coordinate); // отправка туда курсора
-					SetConsoleTextAttribute(h, 12); // установка цвета в красный
-					cout << apple; // отображение символа "яблока"
-
-					spinLock.unlock();
+				   spinLock.lock();
+					 apple_coordinate.X = X_apple; // установка в объект координат новой корректной позиции "яблока"
+					 apple_coordinate.Y = Y_apple;
+					 SetConsoleCursorPosition(h, apple_coordinate); // отправка туда курсора
+					 SetConsoleTextAttribute(h, 12); // установка цвета в красный
+					 cout << apple; // отображение символа "яблока"
+				   spinLock.unlock();
 				}
 
 				else // случай, когда голова "змейки" оказалась на новой пустой позиции
@@ -248,7 +239,6 @@ int main()
 							winQueue.pop();
 							winQueue.push(true);
 							SetConsoleTextAttribute(h, 10);
-
 							this_thread::sleep_for(chrono::milliseconds(2000));
 							break;
 						};
@@ -261,10 +251,7 @@ int main()
 
 						if (X2 != 0 && X2 != width - 1 && Y2 != 0 && Y2 != height - 1)
 						{
-
-
-							spinLock.lock();
-
+						  spinLock.lock();
 							c2.X = array_X2[0];
 							c2.Y = array_Y2[0];
 							SetConsoleCursorPosition(h2, c2);
@@ -283,17 +270,14 @@ int main()
 							{
 								array_X2[r] = array_X2[r + 1];
 								array_Y2[r] = array_Y2[r + 1];
-
-					          }
+       			          }
 					
 							c2.X = array_X2[length2 - 1] = X2;
 							c2.Y = array_Y2[length2 - 1] = Y2;
 							SetConsoleCursorPosition(h2, c2);
 							SetConsoleTextAttribute(h2, 11);
 							cout << head2;
-
-
-							spinLock.unlock();
+    					  spinLock.unlock();
 
 						}
 
@@ -301,7 +285,7 @@ int main()
 						else
 						{
 
-							spinLock.lock();
+						  spinLock.lock();
 							for (size_t i = 0; i < length2; i++) //отрисовка змейки после пересечения
 							{
 								
@@ -315,8 +299,7 @@ int main()
 								}
 								putchar(snake2);
 							}
-
-							spinLock.unlock();
+						 spinLock.unlock();
 						}
 
 				
@@ -376,10 +359,7 @@ int main()
 	
 		if (X == X_apple && Y == Y_apple ) // проверка на достижение "яблока"
 		{
-
-
 			spinLock.lock();
-
 				c.X = array_X[length - 1]; // установка в объект координат позиции головы "змейки"
 				c.Y = array_Y[length - 1];
 				SetConsoleCursorPosition(h, c); // установка курсора в эту позицию
@@ -393,8 +373,7 @@ int main()
 				SetConsoleCursorPosition(h, c); // установка туда курсора
 				SetConsoleTextAttribute(h, 10);
 				cout << head; // и отображение там символа головы "змейки"
-
-				spinLock.unlock();
+			spinLock.unlock();
 
 			if (length == max_length) // проверка, достигла ли длина "змейки" своего максимального значения
 			{
@@ -422,14 +401,11 @@ int main()
 
 
 			spinLock.lock();
-
-			apple_coordinate.X = X_apple; // установка в объект координат новой корректной позиции "яблока"
-			apple_coordinate.Y = Y_apple;
-			SetConsoleCursorPosition(h, apple_coordinate); // отправка туда курсора
-			SetConsoleTextAttribute(h, 12); // установка цвета в красный
-			cout << apple; // отображение символа "яблока"
-	
-
+			  apple_coordinate.X = X_apple; // установка в объект координат новой корректной позиции "яблока"
+			  apple_coordinate.Y = Y_apple;
+			  SetConsoleCursorPosition(h, apple_coordinate); // отправка туда курсора
+			  SetConsoleTextAttribute(h, 12); // установка цвета в красный
+			  cout << apple; // отображение символа "яблока"
 			spinLock.unlock();
 		}
 
@@ -441,7 +417,6 @@ int main()
 			for (; i < length; i++)
 				if (X == array_X[i] && Y == array_Y[i]) // если совпадение найдено в цикле - прерываемся
 				{
-					
 					cout << " Crash - Win Player 2 BLUE ";
 					winQueue.pop();
 					winQueue.push(true);
@@ -458,9 +433,7 @@ int main()
 
 				if (X != 0 && X != width - 1 && Y != 0 && Y != height - 1)
 				{
-
-					spinLock.lock();
-
+				  spinLock.lock();
 					c.X = array_X[0]; // устанавливаем в объект координат позицию хвоста "змейки"
 					c.Y = array_Y[0];
 					SetConsoleCursorPosition(h, c); // двигаем туда курсор
@@ -479,7 +452,6 @@ int main()
 					{
 						array_X[i] = array_X[i + 1]; // обрабатываем все звенья - кроме последнего
 						array_Y[i] = array_Y[i + 1];
-
 					}
 			
 					c.X = array_X[length - 1] = X; // устанавливаем новую позицию головы "змейки"
@@ -487,20 +459,16 @@ int main()
 					SetConsoleCursorPosition(h, c); // двигаем туда курсора
 					SetConsoleTextAttribute(h, 10);
 					cout << head; // отображаем символ головы "змейки"
-
-
-					spinLock.unlock();
+				  spinLock.unlock();
 				}
 
 				if (length <= 0) { continue; }
 				else
 				{
 
-					spinLock.lock();
+				  spinLock.lock();
 					for (size_t i = 0; i < length; i++)
 					{
-
-						
 						c.X = array_X[i];
 						c.Y = array_Y[i];
 						SetConsoleCursorPosition(h, c);
@@ -511,12 +479,9 @@ int main()
 						}
 						putchar(snake);
 					}
-
-					spinLock.unlock();
+ 				  spinLock.unlock();
 				}
-
 			}
-
 		}
 		auto rezal_game = winQueue.front();
 		if (rezal_game)
